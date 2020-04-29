@@ -3,9 +3,9 @@ module.exports = {
     client: 'mysql',
     connection: {
       host: '127.0.0.1',
-      user: 'bill',
-      password: '123456',
-      database: 'dev_test'
+      user: 'flightbot',
+      password: '!12345678!',
+      database: 'flightmx'
     },
     migrations: {
       tableName: 'knex_migrations',
