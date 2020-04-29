@@ -1,0 +1,57 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "express server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd ./client && npm run start",
+    "install": "cd ./client && npm install",
+    "build": "cd ./client && npm run build",
+    "heroku-postbuild": "**npm run build",
+    "@COMENT_mongooseSeed": [
+      "type - npm run-script mongooseSeed"
+    ],
+    "mongooseSeed": "node scripts/mongooseSeed.js",
+    "@COMENT_knexMigrate": [
+      "type - npm run-script knexMigrate"
+    ],
+    "knexMigrate": "knex migrate:latest --env development",
+    "@COMENT_knexSeed": [
+      "type - npm run-script knexSeed"
+    ],
+    "knexSeed": "knex seed:run --env development",
+    "@COMENT_getFAA": [
+      "type - npm run-script getFAA"
+    ],
+    "getFAA": "scripts/faaImport.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:UT-The-A-Team/FlightMX.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "git@github.com:UT-The-A-Team/FlightMX.git/issues"
+  },
+  "homepage": "git@github.com:UT-The-A-Team/FlightMX.git#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "concurrently": "^5.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "knex": "^0.21.0",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.10",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.3",
+    "routes": "^2.1.0"
+  }
+}

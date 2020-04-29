@@ -1,0 +1,7 @@
+# local .gitignore to keep large data files from being uploaded
+*.json
+*.txt
+*.old
+*.zip
+.DS_Store
+
