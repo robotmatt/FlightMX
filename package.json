@@ -13,21 +13,9 @@
     "install": "cd ./client && npm install",
     "build": "cd ./client && npm run build",
     "heroku-postbuild": "**npm run build",
-    "@COMENT_mongooseSeed": [
-      "type - npm run-script mongooseSeed"
-    ],
     "mongooseSeed": "node scripts/mongooseSeed.js",
-    "@COMENT_knexMigrate": [
-      "type - npm run-script knexMigrate"
-    ],
     "knexMigrate": "knex migrate:latest --env development",
-    "@COMENT_knexSeed": [
-      "type - npm run-script knexSeed"
-    ],
     "knexSeed": "knex seed:run --env development",
-    "@COMENT_getFAA": [
-      "type - npm run-script getFAA"
-    ],
     "getFAA": "scripts/faaImport.sh"
   },
   "repository": {

@@ -1,2 +1,2 @@
-server/scripts/faaData
+/scripts/faaData
 Working folder for FAA data imports
