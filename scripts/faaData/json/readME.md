@@ -1,0 +1,2 @@
+scripts/faaData/json 
+Folder for scrubbed JSON import files
