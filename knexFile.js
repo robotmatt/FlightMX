@@ -1,11 +1,14 @@
+//Dependencies
+require('dotenv').config();
+
 module.exports = {
   development: {
-    client: 'mysql',
+    client: `${process.env.KNEX_CLIENT}`,
     connection: {
-      host: '127.0.0.1',
-      user: 'flightbot',
-      password: '!12345678!',
-      database: 'flightmx'
+      host: `${process.env.KNEX_HOST}`,
+      user: `${process.env.KNEX_USER}`,
+      password: `${process.env.KNEX_PASSWORD}`,
+      database: `${process.env.KNEX_DATABASE}`
     },
     migrations: {
       tableName: 'knex_migrations',
