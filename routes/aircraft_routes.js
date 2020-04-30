@@ -3,25 +3,22 @@ const router = express.Router();
 
 const aircraft_controller = require('../controllers/aircraft_controller');
 
-// list all aircraft
+// list all aircraft - returns ARRAY
 router.get('/', aircraft_controller.aircraft_list);
 
-// create aircraft
+// create aircraft 
 router.get('/create', aircraft_controller.aircraft_create);
 
-// update aircraft
+// update aircraft 
 router.get('/:id/update', aircraft_controller.aircraft_update);
 
-// delete aircraft
-router.get('/:id/delete', aircraft_controller.aircraft_delete);
-
-// one aircraft by id
+// one aircraft by id - returns OBJ
 router.get('/:id/id', aircraft_controller.aircraft_by_id);
 
-// one aircraft by tail no
+// one aircraft by tail no - returns OBJ
 router.get('/:tail_no/tail', aircraft_controller.aircraft_by_tail);
 
-// list all aircraft
-router.get('/aircraft', aircraft_controller.aircraft_list);
+// delete aircraft // delete logbook - returns deleted OBJ
+router.get('/:id/delete', aircraft_controller.aircraft_delete);
 
 module.exports = router;
