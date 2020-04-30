@@ -1,6 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.16.1"
+  },
   "private": true,
   "description": "express server",
   "main": "server.js",
@@ -12,10 +15,11 @@
     "client": "cd ./client && npm run start",
     "install": "cd ./client && npm install",
     "build": "cd ./client && npm run build",
-    "heroku-postbuild": "**npm run build",
-    "mongooseSeed": "node scripts/mongooseSeed.js",
-    "knexMigrate": "knex migrate:latest --env development",
-    "knexSeed": "knex seed:run --env development",
+    "heroku-postbuild": "npm run build",
+    "@REMARK": "USE [npm run-script] <script-name> from root project folder to execute",
+    "mongo-seed": "cd ./scripts && node mongoseed.js",
+    "knex-migrate": "knex migrate:latest --env development",
+    "knex-seed": "knex seed:run --env development",
     "getFAA": "scripts/faaImport.sh"
   },
   "repository": {
