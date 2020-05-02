@@ -19,8 +19,16 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-app.use('/aircraft', aircraftRouter);
-app.use('/logbook', logbookRouter);
+// app.use('/aircraft', aircraftRouter);
+// app.use('/logbook', logbookRouter);
+
+app.use('/api/aircraft', aircraftRouter);
+app.use('/api/logbook', logbookRouter);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // mongodb connection init 
 if (process.env.MONGODB_URI) { // Heroku
