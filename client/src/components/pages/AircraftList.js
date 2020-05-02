@@ -9,7 +9,7 @@ class AircraftList extends Component {
     }}
 
     componentDidMount(){
-        axios.get(`/aircraft`).then(res => {
+        axios.get(`/api/aircraft`).then(res => {
             // console.log(res);
             this.setState({ aircrafts: res.data }); 
             console.log(Object.keys(this.state.aircrafts[0]))
