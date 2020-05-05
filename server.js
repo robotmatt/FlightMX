@@ -6,7 +6,7 @@ const aircraftRouter = require('./routes/aircraft_routes')
 const logbookRouter = require('./routes/logbook_routes')
 
 // Global Constants
-const mongodbRemoteDev = false; // true to use (MLab production instance)
+const mongodbRemoteDev = true; // true to use (MLab production instance)
 const PORT = process.env.PORT || 3001;
 const app = express();
 
