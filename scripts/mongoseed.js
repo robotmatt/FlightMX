@@ -7,7 +7,7 @@ const seedObj = require("../orm/mongoose/seeds"); // seed data objects
 // Global Constants
 const mongodbRemoteDev = false; // true to use (MLab production instance)
 
-// mongodb connection init 
+// Database connection init (mongodb) 
 if (process.env.MONGODB_URI) { // Heroku
     mongoose.connect(process.env.MONGODB_URI);
 } else if (mongodbRemoteDev) { // remote dev

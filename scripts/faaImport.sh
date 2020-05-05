@@ -38,12 +38,12 @@ if ! [ -f "faaImport.lock" ]; then
                 'dealer.txt')
                     printf "%s" 'dealer.txt: applying changes: '
                     tail -n +2 "$j" > "$j.tmp" && mv "$j.tmp" "$j" # removes old header and replaces with the one below
-                    echo "certificateNumber,Ownership,certificateDate,expirationDate,expirationFlag,certificateIssueCount,name,street,street2,city,state,zip,otherNamesCount,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,otherNames6,otherNames7,otherNames8,otherNames9,otherNames10,otherNames11,otherNames12,otherNames13,otherNames14,otherNames15,otherNames16,otherNames17,otherNames18,otherNames19,otherNames20,otherNames21,otherNames22,otherNames23,otherNames24,otherNames25," | cat - $j > $j.temp && mv $j.temp $j
+                    echo "certificateNumber,ownership,certificateDate,expirationDate,expirationFlag,certificateIssueCount,name,street,street2,city,state,zip,otherNamesCount,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,otherNames6,otherNames7,otherNames8,otherNames9,otherNames10,otherNames11,otherNames12,otherNames13,otherNames14,otherNames15,otherNames16,otherNames17,otherNames18,otherNames19,otherNames20,otherNames21,otherNames22,otherNames23,otherNames24,otherNames25," | cat - $j > $j.temp && mv $j.temp $j
                     printf "%s\n" 'complete!' ;;  
                 'dereg.txt')
                     printf "%s" 'dreg.txt: applying changes: '
                     tail -n +2 "$j" > "$j.tmp" && mv "$j.tmp" "$j" # removes old header and replaces with the one below
-                    echo "nNumber,serialnumber,mfgModelCode,statusCode,name,streetMail,streetMail2,citymail,stateMail,zipMail,engineMfgModel,yearMfg,Certification,region,countyMail,countryMail,airWorthDate,cancelDate,modeSCode,indicatorGroup,expCountry,lastActiveDate,certIssueDate,streetPhysical,streetPhysical2,cityPhysical,statePhysical,zipPhysical,countyPhysical,countryPhysical,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,kitMfg,kitModel,modeSCode," | cat - $j > $j.temp && mv $j.temp $j
+                    echo "nNumber,serialNumber,mfgModelCode,statusCode,name,streetMail,streetMail2,cityMail,stateMail,zipMail,engineMfgModel,yearMfg,Certification,region,countyMail,countryMail,airWorthDate,cancelDate,modeSCode,indicatorGroup,expCountry,lastActiveDate,certIssueDate,streetPhysical,streetPhysical2,cityPhysical,statePhysical,zipPhysical,countyPhysical,countryPhysical,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,kitMfg,kitModel,modeSCode," | cat - $j > $j.temp && mv $j.temp $j
                     printf "%s\n" 'complete!' ;;  
                 'docindex.txt')
                     printf "%s" 'docindex.txt: applying changes: '
@@ -58,7 +58,7 @@ if ! [ -f "faaImport.lock" ]; then
                 'master.txt')
                     printf "%s" 'master.txt: applying changes: '
                     tail -n +2 "$j" > "$j.tmp" && mv "$j.tmp" "$j" # removes old header and replaces with the one below
-                    echo "nNumber,serialnumber,mfgModelCode,engMfgModel,yearMfg,typeRegistrant,name,street,street2,city,state,zip,region,county,country,lastActionDate,certIssueDate,certification,typeAircraft,typeEngine,statusCode,modeSCode,fractOwner,airWorthDate,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,expirationDate,uniqueId,kitMfg,kitModel,modeSCode," | cat - $j > $j.temp && mv $j.temp $j
+                    echo "nNumber,serialNumber,mfgModelCode,engMfgModel,yearMfg,typeRegistrant,name,street,street2,city,state,zip,region,county,country,lastActionDate,certIssueDate,certification,typeAircraft,typeEngine,statusCode,modeSCode,fractOwner,airWorthDate,otherNames1,otherNames2,otherNames3,otherNames4,otherNames5,expirationDate,uniqueId,kitMfg,kitModel,modeSCode," | cat - $j > $j.temp && mv $j.temp $j
                     printf "%s\n" 'complete!' ;;  
                 'reserved.txt')
                     printf "%s" 'reserved.txt: applying changes: '
@@ -79,37 +79,36 @@ if ! [ -f "faaImport.lock" ]; then
         cmp --silent $f "$(basename $f .txt).old" && rm -f $f || processFlag=1 
         if [ "$processFlag" -gt 0 ]; then
             cat $f | csvtojson > json/"$(basename $f .txt).json"  # json conversion, moved to json import folder
-
             case "$(basename $f .txt).json" in  # filter for removing unwantd json key-value pairs
                 'acftref.json')
                     printf "%s" 'acftref.json: applying changes: '
-                    jq -c 'del(.. | .field12?)' \
+                    jq 'del(.. | .field12?)' \
                     json/acftref.json > json/acftref.out && mv json/acftref.out json/acftref.json
                     printf "%s\n" 'complete!' ;;  
                 'dealer.json')
                     printf "%s" 'dealer.json: applying changes: '
-                    jq -c 'del(.. | .otherNames6?, .otherNames7?, .otherNames8?, .otherNames9?, .otherNames10?, .otherNames11?, .otherNames12?, .otherNames13?, .otherNames14?, .otherNames15?, .otherNames16?, .otherNames17?, .otherNames18?, .otherNames19?, .otherNames20?, .otherNames21?, .otherNames22?, .otherNames23?, .otherNames24?, .otherNames25?, .field39?)' \
+                    jq 'del(.. | .otherNames6?, .otherNames7?, .otherNames8?, .otherNames9?, .otherNames10?, .otherNames11?, .otherNames12?, .otherNames13?, .otherNames14?, .otherNames15?, .otherNames16?, .otherNames17?, .otherNames18?, .otherNames19?, .otherNames20?, .otherNames21?, .otherNames22?, .otherNames23?, .otherNames24?, .otherNames25?, .field39?)' \
                     json/dealer.json > json/dealer.out && mv json/dealer.out json/dealer.json
                     printf "%s\n" 'complete!' ;;  
                 'dereg.json')
                     printf "%s" 'dererg.json: applying changes: '
-                    jq -c 'del(.. | .field39?)' json/dereg.json > json/dereg.out && mv json/dereg.out json/dereg.json
+                    jq 'del(.. | .field39?)' json/dereg.json > json/dereg.out && mv json/dereg.out json/dereg.json
                     printf "%s\n" 'complete!' ;;  
                 'docindex.json')
                     printf "%s" 'docindex.json: applying changes: '
-                    jq -c 'del(.. | .field10?)' json/docindex.json > json/docindex.out && mv json/docindex.out json/docindex.json
+                    jq 'del(.. | .field10?)' json/docindex.json > json/docindex.out && mv json/docindex.out json/docindex.json
                     printf "%s\n" 'complete!' ;;  
                 'engine.json')
                     printf "%s" 'engine.json: applying changes: '
-                    jq -c 'del(.. | .field7?)' json/engine.json > json/engine.out && mv json/engine.out json/engine.json
+                    jq 'del(.. | .field7?)' json/engine.json > json/engine.out && mv json/engine.out json/engine.json
                     printf "%s\n" 'complete!' ;;  
                 'master.json')
                     printf "%s" 'master.json: applying changes: '
-                    jq -c 'del(.. | .fractOwner?, .field35?)' json/master.json > json/master.out && mv json/master.out json/master.json
+                    jq 'del(.. | .fractOwner?, .field35?)' json/master.json > json/master.out && mv json/master.out json/master.json
                     printf "%s\n" 'complete!' ;;  
                 'reserved.json')
                     printf "%s" 'reserved.json: applying changes: '
-                    jq -c 'del(.. | .field12?)' json/reserved.json > json/reserved.out && mv json/reserved.out json/reserved.json
+                    jq 'del(.. | .field12?)' json/reserved.json > json/reserved.out && mv json/reserved.out json/reserved.json
                     printf "%s\n" 'complete!' ;;  
                 *)
                     printf "%s\n" '!!! File not processed - Error json processing!' 
