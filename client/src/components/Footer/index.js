@@ -7,6 +7,7 @@ const Footer = () => (
 			<p>Homepage ©2020</p>
 		</div>	
 	</footer>
+	
 );
 
 export default Footer;
