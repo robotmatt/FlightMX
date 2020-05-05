@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import View from "./View"
 
 
 export default class extends Component {
@@ -6,7 +7,7 @@ export default class extends Component {
   
   render() {
     return (
-      <h1>This is the homepage</h1>
+     <View />
     );
   }
 }

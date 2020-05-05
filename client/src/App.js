@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import background from './assets/images/sr71.jpg';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
 import Nav from "./components/Nav"
 import Footer from "./components/Footer"
 import Error from "./components/Error"
