@@ -1,4 +1,13 @@
 import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useRouteMatch
+  } from "react-router-dom";
+  
+import AircraftList from "../pages/AircraftList";
 
 function Nav() {
     return (
@@ -8,6 +17,7 @@ function Nav() {
             </a>
             <div id="navbarNav">
                 <ul className="navbar-nav">
+                    <Link to="/" >Thing</Link>
                     <li className="nav-item" id="login">
                         <a className="nav-link" href="/login"><button type="button" className="btn btn-info text-white">Login</button></a>
                     </li>
