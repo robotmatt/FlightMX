@@ -5,8 +5,12 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import Nav from "./components/Nav"
 import Footer from "./components/Footer"
-import AircraftList from "./components/pages/AircraftList"
-import Error from "./components/pages/Error"
+import Error from "./components/Error"
+import Home from "./components/Home"
+import Aircraft from "./components/Aircraft"
+import Logbook from "./components/Logbook"
+import Login from "./components/Login"
+import Logout from "./components/Logout"
 import './App.css';
 
 
@@ -16,11 +20,12 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={AircraftList} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/logbook/:aircraftID" component={Logbook} />
+          <Route exact path="/aircraft/:aircraftID" component={Aircraft} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
           <Route component={Error} />
-          {/* <Route exact path="/saved" component={SaveBooks} />
-          <Route exact path="/saved/:id" component={SaveBooks} />
-          <Route component={NoMatch} />  */}
         </Switch>
         <Footer />
       </div>
