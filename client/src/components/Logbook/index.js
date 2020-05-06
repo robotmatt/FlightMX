@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-
+import View from "./View"
 
 export default class extends Component {
-  state = {};
+  state = {this: "test"};
   
   render() {
     return (
-      <h1>Logbook</h1>
+      <View {...this.props} {...this.state} />
     );
   }
 }

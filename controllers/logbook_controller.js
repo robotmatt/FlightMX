@@ -14,7 +14,9 @@ logbook_list = function (req, res, next) {
 
 // returns ARRAY, all logbook entries of aircraftID
 logbook_by_aircraft_id = function (req, res, next) {
-    db.Logbook.find({ _id: req.params.id })
+    db.Logbook.find({
+            _id: req.params.id
+        })
         .then(function (logbook) {
             res.json(logbook)
         })
@@ -25,7 +27,10 @@ logbook_by_aircraft_id = function (req, res, next) {
 
 // returns ARRAY, all logbook entries of aircraftID of type
 logbook_by_id_type = function (req, res, next) {
-    db.Logbook.find({ _id: req.params.id, type: req.params.type })
+    db.Logbook.find({
+            _id: req.params.id,
+            type: req.params.type
+        })
         .then(function (logbook) {
             res.json(logbook)
         })
@@ -37,7 +42,9 @@ logbook_by_id_type = function (req, res, next) {
 
 // returns ARRAY,  all logbook entries of tail
 logbook_by_tail = function (req, res, next) {
-    db.Logbook.find({ tail_number: req.params.tail })
+    db.Logbook.find({
+            tail_number: req.params.tail
+        })
         .then(function (logbook) {
             res.json(logbook)
         })
@@ -48,7 +55,10 @@ logbook_by_tail = function (req, res, next) {
 
 // returns ARRAY, all logbook entries of tail of type
 logbook_by_tail_type = function (req, res, next) {
-    db.Logbook.find({ tail_number: req.params.tail, type: req.params.type })
+    db.Logbook.find({
+            tail_number: req.params.tail,
+            type: req.params.type
+        })
         .then(function (logbook) {
             res.json(logbook)
         })
@@ -60,7 +70,9 @@ logbook_by_tail_type = function (req, res, next) {
 
 // returns OBJECT, single logbook via _id 
 logbook_by_id = function (req, res) {
-    db.Logbook.findById({ _id: req.params.id })
+    db.Logbook.findById({
+            _id: req.params.id
+        })
         .then(function (logbook) {
             res.json(logbook)
         })
@@ -71,7 +83,16 @@ logbook_by_id = function (req, res) {
 
 
 logbook_create = function (req, res) {
-    res.send('NOT READY: logbook create');
+    db.Logbook.create(req.body)
+        .then(function (dbArticle) {
+            // If we were able to successfully update an Article, send it back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+
 };
 
 logbook_update = function (req, res) {

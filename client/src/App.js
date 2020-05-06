@@ -18,8 +18,8 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/logbook/:aircraftID" component={Logbook} />
-          <Route exact path="/aircraft/:aircraftID" component={Aircraft} />
+          <Route exact path="/logbook/:aircraftID?" component={Logbook} />
+          <Route exact path="/aircraft/:aircraftID?" component={Aircraft} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/logout" component={Logout} />
           <Route component={Error} />
