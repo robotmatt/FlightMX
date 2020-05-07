@@ -31,10 +31,18 @@ class AircraftList extends Component {
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.aircrafts[0])
-        return header.map((key, index) => {
-           return <th key={index}>{key.toUpperCase()}</th>
-        })
+
+        let thing = this.state.aircrafts[0];
+        if(thing){
+            let header = Object.keys(thing);
+            console.log("-------")
+            console.log(header)
+            
+            return header.map((key, index) => {
+               return <th key={index}>{key.toUpperCase()}</th>
+            })
+        }
+        
         }
 
 
@@ -44,7 +52,9 @@ class AircraftList extends Component {
               <h1 id='title'>Aircraft List</h1>
               <table id='aircrafts'>
                  <tbody>
-                    {/* <tr>{this.renderTableHeader()}</tr> */}
+                    <tr>
+                    {this.renderTableHeader()}
+                    </tr>
                     {this.renderTableData()}
                  </tbody>
               </table>

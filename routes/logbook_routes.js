@@ -22,12 +22,13 @@ router.get('/:tail/tail/:type/type', logbook_controller.logbook_by_tail_type);
 router.get('/:id/id', logbook_controller.logbook_by_id);
 
 // create logbook
-router.get('/create', logbook_controller.logbook_create);
+router.post('/create', logbook_controller.logbook_create);
 
 // update logbook 
-router.get('/:id/update', logbook_controller.logbook_update);
+router.post('/:id/update', logbook_controller.logbook_update);
 
 // delete logbook - returns deleted OBJ
 router.get('/:id/delete', logbook_controller.logbook_delete);
+
 
 module.exports = router;
