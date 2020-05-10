@@ -1,4 +1,3 @@
-
 exports.up = function (knex) {
     return knex.schema
 
@@ -11,16 +10,16 @@ exports.up = function (knex) {
             table.string("engineType")
             table.string("acCat")
             table.string("buildCert")
-            table.integer("engineQty")
-            table.integer("seats")
+            table.string("engineQty")
+            table.string("seats")
             table.string("acWeight")
-            table.integer("speed")
+            table.string("speed")
         })
 
         .createTable("dealer", table => {
             table.increments("id").unsigned().primary();
             table.string("certificateNumber")
-            table.string("Ownership")
+            table.string("ownership")
             table.string("certificateDate")
             table.string("expirationDate")
             table.string("expirationFlag")
@@ -42,13 +41,13 @@ exports.up = function (knex) {
         .createTable("dereg", table => {
             table.increments("id").unsigned().primary();
             table.string("nNumber")
-            table.string("serialnumber")
+            table.string("serialNumber")
             table.string("mfgModelCode")
             table.string("statusCode")
             table.string("name")
             table.string("streetMail")
             table.string("streetMail2")
-            table.string("citymail")
+            table.string("cityMail")
             table.string("stateMail")
             table.string("zipMail")
             table.string("engineMfgModel")
@@ -88,6 +87,7 @@ exports.up = function (knex) {
             table.string("documentId")
             table.string("drDate")
             table.string("processingDate")
+            table.string("corrDate")
             table.string("corrId")
             table.string("serialId")
         })
@@ -105,10 +105,10 @@ exports.up = function (knex) {
         .createTable("master", table => {
             table.increments("id").unsigned().primary();
             table.string("nNumber")
-            table.string("serialnumber")
+            table.string("serialNumber")
             table.string("mfgModelCode")
             table.string("engMfgModel")
-            table.integer("yearMfg")
+            table.string("yearMfg")
             table.string("typeRegistrant")
             table.string("name")
             table.string("street")
@@ -140,6 +140,7 @@ exports.up = function (knex) {
 
         .createTable("reserved", table => {
             table.increments("id").unsigned().primary();
+            table.string("nNumber")
             table.string("registrant")
             table.string("street")
             table.string("street2")
@@ -170,4 +171,3 @@ exports.down = function (knex) {
     return knex.schema.dropTable("master")
     return knex.schema.dropTable("reserved");
 };
-
