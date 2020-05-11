@@ -23,7 +23,7 @@ knexLocal = {
   }
 };
 knexRemote = {
-  development: {
+  production: {
     client: `${process.env.KNEX_CLIENT_REMOTE}`,
     connection: {
       host: `${process.env.KNEX_HOST_REMOTE}`,
