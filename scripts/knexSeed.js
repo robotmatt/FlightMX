@@ -1,5 +1,6 @@
 //Dependencies
 require('dotenv').config({ path: '../.env' });
+const faa = require('./faaData/functionData/faa');
 const fs = require("fs");
 const path = require("path");
 
@@ -9,14 +10,24 @@ let exportObj = {}; // export object
 deleteList = [];
 importList = getFiles();
 
-startImport()
-
-// Extrapolates file list and table names to import 
+// Extrapolates file list and table names to import and deletes old data
 function getFiles() {
+    // Dependencies
+    var knexCleaner = require('knex-cleaner');
+    const knexFile = require('../knexFile');
+    let dbConfig = {};
+
+    // Database connection init (knex) 
+    knexFile.development ? dbConfig = knexFile.development : dbConfig = knexFile.production;
+    const knex = require('knex')(dbConfig);
+
+    // Deletes all database rows
+    console.log('Removing all table data!')
+    // knexCleaner.clean(knex).then(console.log('Deleting table data...')); **********************************
+
     const importFiles = [];
     const holdTillEnd = [];
     fs
-        // Deletes all database rows
         .readdirSync(`${__dirname}/faaData/json/`)
         .forEach(function (file) {
             if (file.substring(file.length - 5) === ".json") {
@@ -35,36 +46,9 @@ function getFiles() {
     return importFiles;
 }
 
-
-function startImport() {
-    // Dependencies
-    var knexCleaner = require('knex-cleaner');
-    const knexFile = require('../knexFile');
-    let dbConfig = {};
-
-    // Database connection init (knex) 
-    knexFile.development ? dbConfig = knexFile.development : dbConfig = knexFile.production;
-    const knex = require('knex')(dbConfig);
-
-    // Deletes all database rows
-    console.log('Removing all table data!')
-    knexCleaner.clean(knex).then(loopImport());
-}
-
-// recursively call itself until files list is consumed
-function loopImport() {
-    if (importList.length > 0) {
-        let pFile = importList[0][0];
-        let pTable = importList[0][1];
-        importList.shift();
-        loadData(pFile, pTable, loopImport)
-    }
-}
-
 function loadData(dataFile, tableName, _callback) {
     // Dependencies
     const knexFile = require('../knexFile');
-    var knexCleaner = require('knex-cleaner');
     const LineByLineReader = require('line-by-line');
 
     // Global Constant
@@ -98,14 +82,59 @@ function loadData(dataFile, tableName, _callback) {
             knex.insert(row) // Insert row object into database
                 .into(tableName)
                 .then((result) => {
+                    if (tableName === 'master') {
+                        console.log(row);
+                        const flyObj = {
+                            tailNo: row.nNumber,
+                            serial: row.serialNumber,
+                            uniqueCode: row.uniqueId,
+                            transCode: row.modeSCode,
+                        };
+                        console.log(flyObj);
+
+
+
+
+
+                        // knex.select("tailNo")
+                        //     .from(fly)
+                        //     .where("tailNo", row.nNumber)
+                        //     .andWhere("serial", row.serialNumber)
+                        //     .then(flyList => {
+                        //         if (flyList.length === 0) {
+                        //             return knex('fly')
+                        //                 .insert([{
+                        //                     tailNo: row.nNumber,
+                        //                     serial: row.serial,
+                        //                     enjType: row.typeEngine,
+                        //                     password: bcrypt.hashSync(req.body.password, 10)
+                        //                 }])
+                        //                 .then((newUserId) => {
+                        //                     console.log('inserted user', newUserId);
+                        //                 });
+                        //         }
+                        //         console.log('not inserting user');
+                        //         return;
+                        //     });
+
+
+
+
+
+
+
+                        // populate new tables here while looping through master input
+                    }
                     row = {}; // Resets row
                 })
                 .finally(() => {
-                    lr.resume(); // Resumes the input stream
+                    setTimeout(() => {
+                        console.log('Next!')
+                        lr.resume(); // Resumes the input stream
+                    }, 2000);
+
+
                 });
-            if (tableName === 'master') {
-                // populate new tables here while looping through master input
-            }
         }
         if (recording) {
             // Checks for key/value pairs withing text "" and processes
@@ -127,4 +156,16 @@ function loadData(dataFile, tableName, _callback) {
         console.log(`${tableName} complete!`)
         _callback();
     });
+}
+
+loopImport();
+
+// recursively call itself until files list is consumed
+function loopImport() {
+    if (importList.length > 0) {
+        let pFile = importList[0][0];
+        let pTable = importList[0][1];
+        importList.shift();
+        loadData(pFile, pTable, loopImport)
+    }
 }
