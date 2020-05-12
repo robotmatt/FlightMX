@@ -86,14 +86,14 @@ class Logbook extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Logbook Entries for {this.state.tail_number}</h1>
-        <Button onClick={this.handleShow}>Add Entry</Button>
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
+      <div class="mr-5 ml-5 ">
+        <h1 class="mt-2">Logbook Entries for {this.state.tail_number}</h1>
+        <Button onClick={this.handleShow} className="mb-3 mt-1">Add Entry</Button>
+        <Modal show={this.state.showModal} onHide={this.handleClose} >
           <Modal.Header closeButton>
             <Modal.Title>Add Logbook Entry</Modal.Title>
           </Modal.Header>
-          <Form>
+          <Form className="p-4" >
             <Form.Group controlId="tail_number">
               <Form.Label>Tail Number</Form.Label>
               <Form.Control
@@ -117,7 +117,7 @@ class Logbook extends Component {
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="entry_date">
-              <Form.Label>Date</Form.Label>
+              <Form.Label className="mr-2">Date</Form.Label>
               <DatePicker
                 selected={this.state.entry_date}
                 onChange={(date) => this.setState({ entry_date: date })}
