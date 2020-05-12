@@ -133,7 +133,7 @@ exports.up = function (knex) {
             table.string("otherNames4")
             table.string("otherNames5")
             table.string("expirationDate")
-            table.string("uniqueId")
+            table.string("uniqueId").unique().notNullable()
             table.string("kitMfg")
             table.string("kitModel")
         })
