@@ -3,5 +3,6 @@
 *.txt
 *.old
 *.zip
+*.pdf
 .DS_Store
 
