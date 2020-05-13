@@ -7,6 +7,7 @@ import Home from "../components/Home"
 import About from "./About"
 import Login from "./Login"
 import Logout from "./Logout"
+import Pricing from "./Pricing"
 
 function UnauthenticatedApp() {
   return (
@@ -18,6 +19,7 @@ function UnauthenticatedApp() {
         <Route exact path="/about" component={About}/>
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
+        <Route exact path="/pricing" component={Pricing} />
         <Route component={Error} />
       </Switch>
       <Footer />
