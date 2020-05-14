@@ -8,9 +8,6 @@ function View() {
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="/logbook">Aircraft Logbook</Nav.Link>
         <Nav.Link href="/monitor">Engine Monitor</Nav.Link>
-        <Nav.Link eventKey="disabled" disabled>
-          Next Link (Disabled)
-        </Nav.Link>
       </Nav>
     </div>
   );

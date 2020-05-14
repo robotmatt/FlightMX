@@ -10,7 +10,14 @@ import {
   Col,
 } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
-import { XYPlot, LineSeries, XAxis, YAxis } from "react-vis";
+import {
+  XYPlot,
+  LineSeries,
+  XAxis,
+  YAxis,
+  VerticalGridLines,
+  HorizontalGridLines,
+} from "react-vis";
 import data from "./flight.json";
 import "../../../node_modules/react-vis/dist/style.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -48,23 +55,23 @@ class Monitor extends Component {
               <div class="cht-chart">
                 <h1>CHT</h1>
                 <XYPlot height={400} width={980}>
+                  <VerticalGridLines />
+                  <HorizontalGridLines />
                   <LineSeries data={cht.cht1} />
                   <LineSeries data={cht.cht2} />
                   <LineSeries data={cht.cht3} />
                   <LineSeries data={cht.cht4} />
                   <XAxis title="CHT" />
-                  <YAxis title="Time"/>
+                  <YAxis title="Time" />
                 </XYPlot>
               </div>
               <h1>EGT</h1>
               <div class="egt-chart">
                 <XYPlot height={400} width={980}>
                   <LineSeries data={egt.egt1} />
-                  <LineSeries data={egt.egt2} />
-                  <LineSeries data={egt.egt3} />
-                  <LineSeries data={egt.egt4} />
+                  
                   <XAxis title="EGT" />
-                  <YAxis title="Time"/>
+                  <YAxis title="Time" />
                 </XYPlot>
               </div>
               <h1>Oil</h1>
