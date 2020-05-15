@@ -1,25 +1,46 @@
-import React from 'react';
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Nav from "./components/Nav"
-// import Footer from "./components/Footer"
-// import Error from "./components/Error"
-// import Home from "./components/Home"
-// import Aircraft from "./pages/Aircraft"
-// import Logbook from "./pages/Logbook"
-// import About from "./pages/About"
-// import Login from "./components/Login"
-// import Logout from "./components/Logout"
-import AuthenticatedApp from "./pages/Authenticated/AuthenticatedApp"
-import UnauthenticatedApp from "./pages/Unauthenticated/UnauthenticatedApp"
-import './App.css';
+import React, { useState } from "react"
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import PrivateRoute from './PrivateRoute';
+import About from "./pages/About"
+import Login from "./pages/Login"
+import Pricing from "./pages/Pricing"
+import Register from "./pages/Register"
 
-function useUser(){
-  return false;
-}
+import { AuthContext } from "./context/auth";
 
-function App() {
-    const user = useUser();
-    return user ? <AuthenticatedApp /> : <UnauthenticatedApp />
+function App(props) {
+  const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+  const [authTokens, setAuthTokens] = useState(existingTokens);
+  
+  const setTokens = (data) => {
+    localStorage.setItem("tokens", JSON.stringify(data));
+    setAuthTokens(data);
+  }
+
+  return (
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home Page</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin Page</Link>
+          </li>
+        </ul>
+        <Route exact path="/" component={Home} />
+        <PrivateRoute path="/admin" component={Admin} />
+        <Route exact path="/about" component={About}/>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/pricing" component={Pricing} />
+      </div>
+    </Router>
+    </AuthContext.Provider>
+  );
 }
 
 export default App;
