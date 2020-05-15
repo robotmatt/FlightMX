@@ -6,8 +6,8 @@ import Error from "../../components/Error"
 import Home from "./Home"
 import About from "../About"
 import Login from "../Login"
-import Logout from "../Logout"
 import Pricing from "../Pricing"
+import Register from "../Register"
 
 function UnauthenticatedApp() {
   return (
@@ -18,7 +18,7 @@ function UnauthenticatedApp() {
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About}/>
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/pricing" component={Pricing} />
         <Route component={Error} />
       </Switch>

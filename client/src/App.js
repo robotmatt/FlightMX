@@ -14,7 +14,7 @@ import UnauthenticatedApp from "./pages/Unauthenticated/UnauthenticatedApp"
 import './App.css';
 
 function useUser(){
-  return true;
+  return false;
 }
 
 function App() {
