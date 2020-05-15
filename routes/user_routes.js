@@ -1,5 +1,9 @@
+// importing modules  
 const express = require('express');
 const router = express.Router();
+
+// importing User Schema  
+const User = require('../models/user');
 
 const user_controller = require('../controllers/user_controller');
 
