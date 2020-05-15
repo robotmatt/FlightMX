@@ -19,9 +19,13 @@ class Monitor extends Component {
     cht: { cht1: [], cht2: [], cht3: [], cht4: [] },
     egt: { egt1: [], egt2: [], egt3: [], egt4: [] },
     oil: { oilp: [], oilt: [] },
+    tail_number: ""
   };
 
   componentDidMount() {
+    const { tail_number } = this.props.match.params;
+    this.setState({ tail_number: tail_number });
+
     let cht = { cht1: [], cht2: [], cht3: [], cht4: [] };
     let egt = { egt1: [], egt2: [], egt3: [], egt4: [] };
     let oil = { oilp: [], oilt: [] };
@@ -52,9 +56,10 @@ class Monitor extends Component {
             <Sidebar />
           </Col>
           <Col>
-            <div class="mr-5 ml-5 ">
+            <div class="mr-5 ml-5 mt-2">
+              <h1>Latest Engine Monitor Data for {this.state.tail_number}</h1>
               <div class="cht-chart">
-                <h1>CHT</h1>
+                <h3>Cylinder Head Temp</h3>
                 <XYPlot height={400} width={980}>
                   <VerticalGridLines />
                   <HorizontalGridLines />
@@ -67,7 +72,7 @@ class Monitor extends Component {
                 </XYPlot>
               </div>
               
-              <h1>EGT</h1>
+              <h1>Exhaust Gas Temp</h1>
               <div class="egt-chart">
                 <XYPlot height={400} width={980} yDomain={[800, 1500]}>
                   <VerticalGridLines />
@@ -80,7 +85,7 @@ class Monitor extends Component {
                   <YAxis title="Time" />
                 </XYPlot>
               </div>
-              <h1>Oil</h1>
+              <h1>Oil Temp and Pressure</h1>
               <div class="oil-chart">
                 <XYPlot height={400} width={980} yDomain={[0, 250]}>
                   <VerticalGridLines />

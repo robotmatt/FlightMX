@@ -42,13 +42,13 @@ app.post('/register', function (req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            res.redirect('/home');
         });
     });
 });
 
 app.post('/login', passport.authenticate('local'), function (req, res) {
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 app.get('/logout', function (req, res) {

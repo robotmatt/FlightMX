@@ -10,9 +10,9 @@ function View() {
         <Nav.Link href="/about">About</Nav.Link>
         <Nav.Link href="/">Pricing</Nav.Link>
       </Nav>
-      <Form inline>
-        <Button variant="outline-info">Login</Button>
-      </Form>
+        <Button variant="outline-info" size="sm" href="/register" className="mx-2">Sign Up</Button>
+        <Button variant="outline-info" size="sm" active href="/login">Login</Button>
+    
     </Navbar>
   );
 }
