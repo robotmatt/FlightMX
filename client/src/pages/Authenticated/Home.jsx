@@ -14,8 +14,8 @@ function Home() {
         <Col>
           <div class="m-3">
           <CardGroup>
-            <PlaneCard title="N4LD"/>
-            <PlaneCard title="N4MA"/>
+            <PlaneCard tail="N4LD"/>
+            <PlaneCard tail="OMOOAFM1281"/>
             </CardGroup>
           </div>
         </Col>
