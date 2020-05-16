@@ -35,6 +35,23 @@ logbook_by_aircraft_id = (req, res) => {
         })
 };
 
+// returns ARRAY, all logbook entries of tail_number
+logbook_by_tail_number = (req, res) => {
+    db.Logbook.find({ tail_number: req.params.tail_number })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot find Logbook(s) with id=${req.params.id}!`
+                });
+            } else res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: `Error in finding Logbook(s) with id=${req.params.id}.`
+            });
+        })
+};
+
 // returns ARRAY, all logbook entries of aircraftID of type
 logbook_by_id_type = (req, res) => {
     db.Logbook.find({ aircraft_id: req.params.aircraft_id, type: req.params.type })
@@ -190,6 +207,7 @@ logbook_delete = (req, res) => {
 module.exports = {
     logbook_list,
     logbook_by_aircraft_id,
+    logbook_by_tail_number,
     logbook_by_id_type,
     logbook_by_id_type,
     logbook_by_id,
