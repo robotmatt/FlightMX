@@ -35,6 +35,23 @@ logbook_by_aircraft_id = (req, res) => {
         })
 };
 
+// returns ARRAY, all logbook entries of tail_number
+logbook_by_tail_number = (req, res) => {
+    db.Logbook.find({ tail_number: req.params.tail_number })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot find Logbook(s) with id=${req.params.id}!`
+                });
+            } else res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: `Error in finding Logbook(s) with id=${req.params.id}.`
+            });
+        })
+};
+
 // returns ARRAY, all logbook entries of aircraftID of type
 logbook_by_id_type = (req, res) => {
     db.Logbook.find({ aircraft_id: req.params.aircraft_id, type: req.params.type })
@@ -72,7 +89,7 @@ logbook_by_id = (req, res) => {
 // Creates new Logbook entry - requires aircraft_id for association
 // Form data required: (type:, entry_note:)
 // Returns new Logbook document
-logbook_create = (req, res) => {
+logbook_id_create = (req, res) => {
     if (!req.params.aircraft_id) {
         res.status(400).send({ message: "Logbook Aircraft data must exists!" });
         return;
@@ -84,6 +101,44 @@ logbook_create = (req, res) => {
             const newEntry = new db.Logbook({
                 aircraft_id: req.params.aircraft_id, // url parameter 
                 tail_number: aircraft.tail_number, // database retrieval 
+                type: req.body.type, // form data
+                entry_note: req.body.entry_note, // form data
+                entry_date: new Date() // calculated 
+            });
+            newEntry
+                .save(newEntry)
+                .then(data => {
+                    res.send(data);
+                })
+                // logbook error catch
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                            err.message || "An error occurred while creating the Logbook entry."
+                    });
+                });
+        })
+        // aircraft error catch
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "An error occurred while retrieving associated aircraft record."
+            })
+        });
+}
+
+logbook_tail_create = (req, res) => {
+    if (!req.params.tail_number) {
+        res.status(400).send({ message: "Logbook Aircraft data must exists!" });
+        return;
+    }
+    console.log(req.body.tail_number)
+    // find associated aircraft for logbook entry
+    db.Aircraft.find({ tail_number: req.params.tail_number })
+        .then(aircraft => {
+            // create logbook entry
+            const newEntry = new db.Logbook({
+                tail_number: req.body.tail_number,
                 type: req.body.type, // form data
                 entry_note: req.body.entry_note, // form data
                 entry_date: new Date() // calculated 
@@ -152,10 +207,12 @@ logbook_delete = (req, res) => {
 module.exports = {
     logbook_list,
     logbook_by_aircraft_id,
+    logbook_by_tail_number,
     logbook_by_id_type,
     logbook_by_id_type,
     logbook_by_id,
-    logbook_create,
+    logbook_id_create,
+    logbook_tail_create,
     logbook_update,
     logbook_delete
 }
