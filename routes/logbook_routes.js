@@ -16,7 +16,10 @@ router.get('/:aircraft_id/aircraft_id/:type/type', logbook_controller.logbook_by
 router.get('/:id/id', logbook_controller.logbook_by_id);
 
 // create logbook
-router.post('/:aircraft_id/create', logbook_controller.logbook_create);
+router.post('/:aircraft_id/id_create', logbook_controller.logbook_id_create);
+
+// create logbook - tail_number
+router.post('/tail_create/:tail_number', logbook_controller.logbook_tail_create);
 
 // update logbook 
 router.post('/:id/update', logbook_controller.logbook_update);
