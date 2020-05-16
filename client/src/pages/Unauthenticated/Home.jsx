@@ -15,8 +15,8 @@ function Home() {
         </Container>
         <Container>
         <Row className="justify-content-md-center">
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
+          <Button variant="primary" className="mx-2">Learn More</Button>
+          <Button variant="secondary">Try Us!</Button>
           </Row>
         </Container>
       </Jumbotron>
