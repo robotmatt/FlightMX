@@ -32,7 +32,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 // Serve up static routes
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
-    app.use('*', express.static('client/build'));
+    //app.use('*', express.static('client/build'));
 }
 
 app.post('/register', function (req, res) {
