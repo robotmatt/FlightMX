@@ -9,7 +9,6 @@ import Monitor from "./Monitor"
 import Logbook from "./Logbook"
 import About from "../About"
 import Login from "../Login"
-import Logout from "../Logout"
 
 function AuthenticatedApp() {
   return (
@@ -20,7 +19,6 @@ function AuthenticatedApp() {
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About}/>
           <Route exact path="/login" component={Login} />
-          <Route exact path="/logout" component={Logout} />
           <Route exact path="/logbook/:tail_number?" component={Logbook} />
           <Route exact path="/aircraft/:aircraftID?" component={Aircraft} />
           <Route exact path="/monitor/:tail_number?" component={Monitor} />

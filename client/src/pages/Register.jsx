@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+class Register extends Component {
   state = {};
 
   componentDidMount() {}
@@ -10,9 +10,9 @@ class Login extends Component {
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
           <h2>Log in to FlightMX</h2>
-          <form class="login" action="/login" method="post" >
+          <form class="login" action="/register" method="post" >
             <div class="form-group">
-              <label for="exampleInputEmail1">Email</label>
+              <label for="email">Email</label>
               <input
                 type="email"
                 class="form-control"
@@ -22,7 +22,7 @@ class Login extends Component {
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
+              <label for="password">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -40,4 +40,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

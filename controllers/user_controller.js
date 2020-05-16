@@ -38,13 +38,14 @@ user_by_id = (req, res) => {
 // returns OBJECT, new user
 user_create = (req, res) => {
     if (!req.body.email) {
-        res.status(400).send({ message: "User email must exists!" });
+        res.status(400).send({
+            message: "User email must exists!"
+        });
         return;
     }
     // create User
     const newUser = new db.User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name, // database retrieval 
+        name: req.body.name,
         email: req.body.email, // form data
         note: req.body.note, // form data
     });
@@ -56,8 +57,7 @@ user_create = (req, res) => {
         // user error catch
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "An error occurred while creating new user."
+                message: err.message || "An error occurred while creating new user."
             });
         });
 };
@@ -69,7 +69,9 @@ user_update = function (req, res) {
             message: "User data can not be empty!"
         });
     }
-    db.User.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false })
+    db.User.findByIdAndUpdate(req.params.id, req.body, {
+            useFindAndModify: false
+        })
         .then(data => {
             if (!data) {
                 res.status(404).send({
