@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const path = require('path');
 const aircraftRouter = require('./routes/aircraft_routes')
 const logbookRouter = require('./routes/logbook_routes')
 const userRouter = require('./routes/user_routes')
